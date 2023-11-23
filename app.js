@@ -4,26 +4,29 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+// importing admin.js exported codes
+const adminRoutes = require('./routes/admin');
+
+// importing shop.js exported codes
+const shopRoutes = require('./routes/admin');
+
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/', (req, res, next) => {
-    console.log('In another middleware!!');
-    next();
+// app.get('/favicon.ico', (req, res) => {
+//     console.log('favicon');
+//     res.status(204);
+// });
+
+// sending req/res to admin.js so that imported codes can run at this point
+// if we add path, it will focus rest path after the sepecifed path on URL
+// app.use('/admin', adminRoutes);
+
+// sending req/res to shop.js so that imported codes can run at this point
+app.use(shopRoutes);
+
+// add 404 Error Page
+app.use((req, res, next) => {
+    res.status(404).send('<h1>Page not found</h1>');
 });
 
-app.use('/add-product', (req, res, next) => {
-    console.log('In another middleware 2!!');
-    res.send('<form action="/product" method="POST"><label for="product">Product</label><input type="text" id="product" name="title"><br><lable for="size">Size</lable><input type="text" id="size" name="size"><br><button type="submit">Add Product</button></form>');
-});
-
-app.use('/product', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/');
-})
-
-app.use('/', (req, res, next) => {
-    console.log('In another middleware 3!!');
-    res.send('<h1>Hello from Express!!</h1>');
-});
-
-app.listen(3000);
+app.listen(4000);
