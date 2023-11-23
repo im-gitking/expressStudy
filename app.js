@@ -8,7 +8,7 @@ const app = express();
 const adminRoutes = require('./routes/admin');
 
 // importing shop.js exported codes
-const shopRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // sending req/res to admin.js so that imported codes can run at this point
 // if we add path, it will focus rest path after the sepecifed path on URL
-// app.use('/admin', adminRoutes);
+app.use('/admin', adminRoutes);
 
 // sending req/res to shop.js so that imported codes can run at this point
 app.use(shopRoutes);
@@ -29,4 +29,4 @@ app.use((req, res, next) => {
     res.status(404).send('<h1>Page not found</h1>');
 });
 
-app.listen(4000);
+app.listen(3000);
