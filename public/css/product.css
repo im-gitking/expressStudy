@@ -1,7 +1,27 @@
+<<<<<<< HEAD
+=======
+.form-control {
+    margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input {
+    display: block;
+    width: 100%;
+}
+
+.form-control input {
+    border: 1px solid #dbc441;
+    font: inherit;
+    border-radius: 2px;
+}
+
+>>>>>>> dd67458780327b4cf23cfa944dce14267ac7cacd
 .product-form {
     width: 20rem;
     max-width: 90%;
     margin: auto;
+<<<<<<< HEAD
     display: block;
 }
 
@@ -24,4 +44,21 @@
 
 .product__description {
     text-align: center;
+=======
+}
+
+button {
+    font: inherit;
+    border: 1px solid slateblue;
+    color: slateblue;
+    background-color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover,
+button:active {
+    background-color: slateblue;
+    color: white;
+>>>>>>> dd67458780327b4cf23cfa944dce14267ac7cacd
 }

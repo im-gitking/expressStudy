@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const path = require('path');
 
 const express = require('express');
@@ -20,3 +21,14 @@ router.get('/orders', shopController.getOrders);
 router.get('/checkout', shopController.getCheckout);
 
 module.exports = router;
+=======
+const express = require('express');
+const productController = require('../controllers/products');
+const rootDir = require('../util/path');
+
+const router = express.Router();
+
+router.get('/', productController.getProducts);
+
+module.exports = router;
+>>>>>>> dd67458780327b4cf23cfa944dce14267ac7cacd
