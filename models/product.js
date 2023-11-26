@@ -19,7 +19,7 @@ module.exports = class Product {
                 products = JSON.parse(fileContent);
             }
             products.push(this);
-            // storing JSON as String
+            // converting JSON to String for 'products' var
             fs.writeFile(p, JSON.stringify(products), (err) => {
                 console.log(err);
             });
