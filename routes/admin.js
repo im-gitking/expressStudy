@@ -8,9 +8,7 @@ const productController = require('../controllers/products');
 const router = express.Router();
 
 // for path -> /admin/add-product => GET
-router.get('/add-product', (req, res, next) => {
-    res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-});
+router.get('/add-product', productController.getAddProduct);
 
 // for path -> /admin/add-product => POST
 router.post('/add-product', productController.postAddProduct)

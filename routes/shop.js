@@ -4,6 +4,6 @@ const rootDir = require('../util/path');
 
 const router = express.Router();
 
-router.get('/', productController.getAddProduct);
+router.get('/', productController.getProducts);
 
 module.exports = router;
