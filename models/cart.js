@@ -17,11 +17,8 @@ module.exports = class Cart {
                 console.log(cart);
             }
             // Analyze the cart => Find existing product
-            console.log(1);
             const existingProductIndex = cart.products.findIndex(prod => prod.id === id);
-            console.log(existingProductIndex);
             const existingProduct = cart.products[existingProductIndex];
-            console.log(2);
 
             let updatedProduct;
             // Add new product/ increase quantity
@@ -41,5 +38,21 @@ module.exports = class Cart {
 
         });
 
+    }
+    static deleteProduct(id, productPrice) {
+        fs.readFile(p, (err, fileContent) => {
+            if (err) {
+                return;
+            }
+            const updatedCart = { ...JSON.parse(fileContent) };
+            const product = updatedCart.products.find(prod => prod.id === id);
+            const productQty = product.qty;
+            updatedCart.products = updatedCart.products.filter(prod => prod.id !== id);
+            updatedCart.totalPrice = updatedCart.totalPrice - (productQty * productPrice);
+
+            fs.writeFile(p, JSON.stringify(updatedCart), err => {
+                console.log(err);
+            })
+        })
     }
 }
