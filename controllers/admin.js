@@ -1,5 +1,4 @@
 const Product = require('../models/product');
-const { connect } = require('../routes/admin');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
