@@ -2,12 +2,13 @@ const Sequelize = require('sequelize');
 
 const sequelize = require('../util/database');
 
+// Defining Model 'product'
 const Product = sequelize.define('product', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
-    primeryKey: true
+    primaryKey: true
   },
   title: Sequelize.STRING,
   price: {
