@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 
 const sequelize = require('./util/database');
 const homeRoutes = require('./routes/home');
-
+const deleteRoutes = require('./routes/deleteRoute');
+const editRoutes = require('./routes/editRoute');
+const UpdateRoutes = require('./routes/updateRoute');
 
 const app = express();
 
@@ -13,6 +15,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/', homeRoutes);
+app.use('/delete', deleteRoutes);
+app.use('/edit', editRoutes);
+app.use('/update', UpdateRoutes);
 
 sequelize
     .sync()
