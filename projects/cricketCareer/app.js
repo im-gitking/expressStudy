@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const sequelize = require('../../util/database');
+const sequelize = require('./util/database');
 
 const allRoutes = require('./routes/cricketer');
 
@@ -16,6 +16,7 @@ app.use(cors());
 app.use('/cricketer', allRoutes);
 
 sequelize
+    // .sync({force: true})
     .sync()
     .then(result => {
         // console.log(result);

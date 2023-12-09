@@ -1,15 +1,15 @@
 const expense = require('express');
 
 const insertController = require('../controllers/submit');
-// const editController = require('../controllers/delete');
-// const updateController = require('../controllers/delete');
-// const fetchController = require('../controllers/delete');
+const editController = require('../controllers/edit');
+const updateController = require('../controllers/update');
+const fetchController = require('../controllers/fetch');
 
 const router = expense.Router();
 
-router.delete('/submit', insertController.insertData);
-// router.delete('/edit', editController.deleteData);
-// router.delete('/update/:id', updateController.deleteData);
-// router.delete('/fetch/:name', fetchController.deleteData);
+router.post('/submit', insertController.insertData);
+router.post('/edit', editController.editData);
+router.post('/update/:id', updateController.updateData);
+router.post('/fetch', fetchController.fetchData);
 
 module.exports = router;

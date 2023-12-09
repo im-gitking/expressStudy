@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const sequelize = require('../util/database');
 
-const Cricketers = sequelize.define('crickter', {
+const Cricketers = sequelize.define('cricketer', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -10,7 +10,7 @@ const Cricketers = sequelize.define('crickter', {
         primaryKey: true
     },
     name: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false
     },
     dob: {
@@ -26,7 +26,7 @@ const Cricketers = sequelize.define('crickter', {
         allowNull: false
     },
     career: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
     },
     numberOfMatches: {

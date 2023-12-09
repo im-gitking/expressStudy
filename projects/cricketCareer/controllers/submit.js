@@ -2,6 +2,7 @@ const Cricketers = require('../models/cricketer');
 
 exports.insertData = (req, res, next) => {
     const data = req.body;
+    console.log(1, 2);
 
     Cricketers.create({
         name: data.name,
@@ -16,8 +17,9 @@ exports.insertData = (req, res, next) => {
         wickets: data.wickets,
         avarage: data.avarage
     })
-    .then(crickter => {
-        res.json(crickter);
+    .then(cricketer => {
+        console.log(cricketer);
+        res.json(cricketer);
     })
     .catch(err => {
         console.log(err);
