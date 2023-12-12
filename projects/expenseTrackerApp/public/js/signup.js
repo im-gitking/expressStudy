@@ -9,14 +9,15 @@ signupForm.addEventListener('submit', signupSubmit);
 async function signupSubmit(e) {
     e.preventDefault();
     try {
-        const signupSubmitedData = await axios.post(`localhost:3000/user/signup`, {
+        const signupSubmitedData = await axios.post(`http://localhost:3000/signup`, {
             name: name.value,
             email: email.value,
             password: password.value
         });
-        console.log(signupSubmitedData);
+        console.log(signupSubmitedData.data);
+        console.log(signupSubmitedData.status);
     }
     catch (err) {
-        console.log('Error.. ', err);
+        console.log("Error -",err.response.status,": ", err.message);
     }
 }

@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
     "appointmentApp": "nodemon ./projects/appointmentApp/app.js",
+    "expenseTracker": "nodemon ./projects/expenseTracker/app.js",
     "expenseTrackerApp": "nodemon ./projects/expenseTrackerApp/app.js",
     "cricketCareer": "nodemon ./projects/cricketCareer/app.js"
   },
