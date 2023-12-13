@@ -12,7 +12,7 @@ exports.login = (req, res, next) => {
                     res.json({message: 'User Logged in Successfully'});
                 }
                 else {
-                    res.json({message: 'Wrong Password, Try Again'});
+                    res.status(401).json({message: 'Wrong Password, Try Again'});
                 }
             }
             // if user not found

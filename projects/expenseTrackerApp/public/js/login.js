@@ -18,8 +18,11 @@ async function loginSubmit(e) {
     }
     catch (err) {
         if (err.response.status === 404) {
-            // console.log(err.response.data.message);
-            // alert(err.response.data.message);
+            if (!alert(err.response.data.message)) {
+                location.reload();
+            }
+        }
+        else if (err.response.status === 401) {
             if (!alert(err.response.data.message)) {
                 location.reload();
             }
