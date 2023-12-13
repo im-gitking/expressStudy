@@ -1,6 +1,6 @@
 const Users = require('../models/users');
 
-exports.signup = (req, res, next) => {
+exports.login = (req, res, next) => {
     const data = req.body;
     console.log(data.email);
     Users.findAll({ where: { email: data.email } })
@@ -8,20 +8,17 @@ exports.signup = (req, res, next) => {
             // if user found
             if (user.length > 0) {
                 // console.log(user.length);
-                // console.log(user);
-                return null;
+                if(user[0].password === data.password) {
+                    res.json({message: 'User Logged in Successfully'});
+                }
+                else {
+                    res.json({message: 'Wrong Password, Try Again'});
+                }
             }
             // if user not found
             else {
-                return Users.create(data);
+                res.status(404).json({message: 'User Not Found'});
             }
-        })
-        .then(user => {
-            if (!user) {
-                // console.log(user);
-                return res.status(302).json({message: 'User already exists'});
-            }
-            res.json(user);
         })
         .catch(err => console.log(err));
 };

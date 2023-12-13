@@ -1,26 +1,23 @@
-const signupForm = document.querySelector('.signupForm');
-const name = document.querySelector('#name');
+const loginForm = document.querySelector('.loginForm');
 const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 
-// signup data submission
-signupForm.addEventListener('submit', signupSubmit);
-async function signupSubmit(e) {
+// login data submission
+loginForm.addEventListener('submit', loginSubmit);
+async function loginSubmit(e) {
     e.preventDefault();
     try {
-        const signupSubmitedData = await axios.post(`http://localhost:3000/user/signup`, {
-            name: name.value,
+        const loginSubmitedData = await axios.post(`http://localhost:3000/user/login`, {
             email: email.value,
             password: password.value
         });
         // console.log(signupSubmitedData.data);
-        if (!alert('User is now registered')) {
+        if (!alert(loginSubmitedData.data.message)) {
             location.reload();
         }
-
     }
     catch (err) {
-        if (err.response.status === 302) {
+        if (err.response.status === 404) {
             // console.log(err.response.data.message);
             // alert(err.response.data.message);
             if (!alert(err.response.data.message)) {

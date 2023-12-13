@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const sequelize = require('./util/database');
 const signupRoutes = require('./routes/signupRoutes');
+const loginRoutes = require('./routes/loginRoutes');
 
 const app = express();
 
@@ -11,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use('/signup', signupRoutes);
+app.use('/user', signupRoutes);
+app.use('/user', loginRoutes);
 
 
 sequelize
