@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Daily Expenses - Expense Tracker App</title>
+</head>
+<body>
+    <main>
+        <form class="addExpenseForm" action="/" method="post">
+
+            <label for="expenseamount">Choose Expense Amount:</label>
+            <input type="text" name="expenseamount" id="expenseamount" required>
+
+            <label for="description">Write Description:</label>
+            <input type="text" name="description" id="description" required>
+
+            <label for="category">Choose Category:</label>
+            <select name="category" id="category" required>
+                <option value="Food">Food</option>
+                <option value="Electicity">Electicity</option>
+                <option value="Water">Water</option>
+                <option value="Study">Study</option>
+                <option value="Extra">Extra</option>
+            </select>
+
+            <input type="submit" value="Add Expense" id="addExpenseBtn">
+        </form>
+
+        <div class="seeExpenses">
+            <ul class="expenseList"></ul>
+        </div>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+    <script src="../public/js/addExpense.js"></script>
+</body>
+</html>

@@ -14,6 +14,7 @@ app.use(cors());
 
 app.use('/user', signupRoutes);
 app.use('/user', loginRoutes);
+app.use('/expense', expenseRoutes);
 
 
 sequelize

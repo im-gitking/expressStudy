@@ -13,7 +13,7 @@ async function loginSubmit(e) {
         });
         // console.log(signupSubmitedData.data);
         if (!alert(loginSubmitedData.data.message)) {
-            location.reload();
+            window.location.href = 'addExpense.html';
         }
     }
     catch (err) {
