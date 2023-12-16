@@ -1,4 +1,5 @@
 const Users = require('../models/users');
+const bcrypt = require('bcrypt');
 
 exports.signup = (req, res, next) => {
     const data = req.body;
@@ -7,21 +8,21 @@ exports.signup = (req, res, next) => {
         .then(user => {
             // if user found
             if (user.length > 0) {
-                // console.log(user.length);
-                // console.log(user);
-                return null;
+                return res.status(302).json({ message: 'User already exists' });
             }
             // if user not found
             else {
-                return Users.create(data);
+                const saltRounds = 10;
+                bcrypt.hash(data.password, saltRounds, async (err, hash) => {
+                    // console.log(err);
+                    user = await Users.create({
+                        name: data.name,
+                        email: data.email,
+                        password: hash
+                    });
+                    res.status(200).json({ message: 'User is now registered' });
+                })
             }
-        })
-        .then(user => {
-            if (!user) {
-                // console.log(user);
-                return res.status(302).json({message: 'User already exists'});
-            }
-            res.json(user);
         })
         .catch(err => console.log(err));
 };

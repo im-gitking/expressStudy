@@ -14,7 +14,7 @@ async function signupSubmit(e) {
             password: password.value
         });
         // console.log(signupSubmitedData.data);
-        if (!alert('User is now registered')) {
+        if (!alert(signupSubmitedData.data.message)) {
             location.reload();
         }
 
@@ -22,7 +22,6 @@ async function signupSubmit(e) {
     catch (err) {
         if (err.response.status === 302) {
             // console.log(err.response.data.message);
-            // alert(err.response.data.message);
             if (!alert(err.response.data.message)) {
                 location.reload();
             }
