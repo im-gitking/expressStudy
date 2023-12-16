@@ -6,8 +6,6 @@ const addExpenseBtn = document.querySelector('#addExpenseBtn');
 
 const expenseList = document.querySelector('.expenseList');
 
-const deleteExpenseBtn = document.querySelector('.deleteExpense');
-
 const addToExpenseList = (expense) => {
     const newLi = document.createElement('li');
     newLi.innerHTML = `<span>${expense.expenseamount} - ${expense.category} - ${expense.description} </span><button class="deleteExpense" id="${expense.id}">Delete Expense</button>`;
@@ -18,7 +16,8 @@ const addToExpenseList = (expense) => {
 document.addEventListener('DOMContentLoaded', showExpenses);
 async function showExpenses(e) {
     try {
-        const getExpenses = await axios.get('http://localhost:3000/expenses/addExpense');
+        const token = localStorage.getItem('token');
+        const getExpenses = await axios.get('http://localhost:3000/expenses/addExpense', { headers: { "Authorization": token } });
         getExpenses.data.forEach(expense => {
             addToExpenseList(expense);
         });

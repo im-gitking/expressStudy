@@ -1,5 +1,10 @@
 const Users = require('../models/users');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const generateAccessToken = (id, name) => {
+    return jwt.sign({ userID: id, name: name }, 'any secret key string');
+}
 
 exports.login = (req, res, next) => {
     const data = req.body;
@@ -17,7 +22,7 @@ exports.login = (req, res, next) => {
 
                     if (result === true) {
                         // console.log('t', result);
-                        res.json({ message: 'User Logged in Successfully' });
+                        res.json({ message: 'User Logged in Successfully', token: generateAccessToken(user[0].id, user[0].name) });
                     }
                     else {
                         // console.log('f', result);

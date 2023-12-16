@@ -12,6 +12,7 @@ async function loginSubmit(e) {
             password: password.value
         });
         // console.log(signupSubmitedData.data);
+        localStorage.setItem('token', loginSubmitedData.data.token);
         if (!alert(loginSubmitedData.data.message)) {
             window.location.href = 'addExpense.html';
         }

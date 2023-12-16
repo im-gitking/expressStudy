@@ -15,17 +15,6 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use((req, res, next) => {
-    Users.findByPk(8)
-        .then(user => {
-            req.user = user;
-            next();
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
-
 app.use('/user', signupRoutes);
 app.use('/user', loginRoutes);
 app.use('/expenses', expenseRoutes);
