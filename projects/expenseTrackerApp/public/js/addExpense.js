@@ -6,6 +6,10 @@ const addExpenseBtn = document.querySelector('#addExpenseBtn');
 
 const expenseList = document.querySelector('.expenseList');
 
+const buyPremium = document.querySelector('.buyPremium');
+
+const token = localStorage.getItem('token');
+
 const addToExpenseList = (expense) => {
     const newLi = document.createElement('li');
     newLi.innerHTML = `<span>${expense.expenseamount} - ${expense.category} - ${expense.description} </span><button class="deleteExpense" id="${expense.id}">Delete Expense</button>`;
@@ -16,7 +20,6 @@ const addToExpenseList = (expense) => {
 document.addEventListener('DOMContentLoaded', showExpenses);
 async function showExpenses(e) {
     try {
-        const token = localStorage.getItem('token');
         const getExpenses = await axios.get('http://localhost:3000/expenses/addExpense', { headers: { "Authorization": token } });
         getExpenses.data.forEach(expense => {
             addToExpenseList(expense);
@@ -38,7 +41,7 @@ async function postExpenses(e) {
             category: category.value
         };
         console.log(2);
-        const postedExpense = await axios.post('http://localhost:3000/expenses/addExpense', expense);
+        const postedExpense = await axios.post('http://localhost:3000/expenses/addExpense', expense, { headers: { "Authorization": token } });
         addToExpenseList(postedExpense.data);
     }
     catch (err) {
@@ -53,13 +56,24 @@ async function deleteExpense(e) {
         if (e.target.classList.contains('deleteExpense')) {
             const expenseId = e.target.id;
             // console.log(expenseId);
-            const deletRequest = await axios.delete(`http://localhost:3000/expenses/addExpense/${expenseId}`);
+            const deletRequest = await axios.delete(`http://localhost:3000/expenses/addExpense/${expenseId}`, { headers: { "Authorization": token } });
             // console.log(deletRequest.data);
             e.target.parentElement.remove();
         }
 
     }
     catch (err) {
+        console.log(err);
+    }
+}
+
+// Razorpay Buy Premium
+buyPremium.addEventListener('click', buyPremiumActions);
+async function buyPremiumActions(e) {
+    try {
+        const response = await axios.get(`http://localhost:3000/purchase/premiummembership`, { headers: { "Authorization": token } });
+    }
+    catch(err) {
         console.log(err);
     }
 }

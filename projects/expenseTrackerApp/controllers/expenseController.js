@@ -1,9 +1,10 @@
 const Users = require('../models/users');
 const Expenses = require('../models/expense');
+const jwt = require('jsonwebtoken');
 
 exports.postExpense = (req, res, next) => {
     const data = req.body;
-    console.log(1);
+    console.log(data);
     // console.log(req.user);
     req.user.createExpense(data)
         .then(expense => {
