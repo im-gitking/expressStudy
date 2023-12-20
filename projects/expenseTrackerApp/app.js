@@ -1,28 +1,41 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const env = require('dotenv').config();
 
+// Routes require
 const sequelize = require('./util/database');
 const signupRoutes = require('./routes/signupRoutes');
 const loginRoutes = require('./routes/loginRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
+const purchaseRoutes = require('./routes/purchaseRoutes');
+
+// Model Tables
 const Users = require('./models/users');
 const Expenses = require('./models/expense');
+const Orders = require('./models/order');
 
+// Using packages to read Requests
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
+// Routes
 app.use('/user', signupRoutes);
 app.use('/user', loginRoutes);
 app.use('/expenses', expenseRoutes);
+app.use('/purchase', purchaseRoutes);
 
+// Associations
 Users.hasMany(Expenses);
 Expenses.belongsTo(Users);
 
+Users.hasMany(Orders);
+Orders.belongsTo(Users);
 
+// DB & server start
 sequelize
     .sync()
     // .sync({force: true})

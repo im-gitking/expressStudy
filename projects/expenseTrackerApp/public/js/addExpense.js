@@ -6,8 +6,6 @@ const addExpenseBtn = document.querySelector('#addExpenseBtn');
 
 const expenseList = document.querySelector('.expenseList');
 
-const buyPremium = document.querySelector('.buyPremium');
-
 const token = localStorage.getItem('token');
 
 const addToExpenseList = (expense) => {
@@ -24,6 +22,16 @@ async function showExpenses(e) {
         getExpenses.data.forEach(expense => {
             addToExpenseList(expense);
         });
+
+        if (localStorage.getItem('premium') === 'true') {
+            console.log(1);
+            const buyPremium = document.querySelector('.buyPremium');
+            buyPremium.remove();
+
+            const premium = document.querySelector('.premium');
+            premium.innerHTML = '<p>Premium User</p>';
+            
+        }
     }
     catch (err) {
         console.log(err);
@@ -63,17 +71,6 @@ async function deleteExpense(e) {
 
     }
     catch (err) {
-        console.log(err);
-    }
-}
-
-// Razorpay Buy Premium
-buyPremium.addEventListener('click', buyPremiumActions);
-async function buyPremiumActions(e) {
-    try {
-        const response = await axios.get(`http://localhost:3000/purchase/premiummembership`, { headers: { "Authorization": token } });
-    }
-    catch(err) {
         console.log(err);
     }
 }
