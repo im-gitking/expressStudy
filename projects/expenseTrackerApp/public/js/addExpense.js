@@ -57,6 +57,7 @@ async function postExpenses(e) {
             category: category.value
         };
         const postedExpense = await axios.post('http://localhost:3000/expenses/addExpense', expense, { headers: { "Authorization": token } });
+        // console.log(postedExpense.data);
         addToExpenseList(postedExpense.data);
     }
     catch (err) {
