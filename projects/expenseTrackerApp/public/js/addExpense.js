@@ -18,20 +18,28 @@ const addToExpenseList = (expense) => {
 document.addEventListener('DOMContentLoaded', showExpenses);
 async function showExpenses(e) {
     try {
+        // JWT Decode function
+        function parseJwt(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        
+            return JSON.parse(jsonPayload);
+        };
+
+        const userDetails = parseJwt(localStorage.getItem('token'));
+
+        if(userDetails.isPremium === true) {
+            document.querySelector('.buyPremium').remove();
+            document.querySelector('.premium').innerHTML = '<p>You are Premium User</p>';
+        }
+        
         const getExpenses = await axios.get('http://localhost:3000/expenses/addExpense', { headers: { "Authorization": token } });
         getExpenses.data.forEach(expense => {
             addToExpenseList(expense);
         });
-
-        if (localStorage.getItem('premium') === 'true') {
-            console.log(1);
-            const buyPremium = document.querySelector('.buyPremium');
-            buyPremium.remove();
-
-            const premium = document.querySelector('.premium');
-            premium.innerHTML = '<p>Premium User</p>';
-            
-        }
     }
     catch (err) {
         console.log(err);
@@ -68,7 +76,6 @@ async function deleteExpense(e) {
             // console.log(deletRequest.data);
             e.target.parentElement.remove();
         }
-
     }
     catch (err) {
         console.log(err);

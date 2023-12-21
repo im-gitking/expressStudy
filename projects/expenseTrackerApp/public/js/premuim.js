@@ -21,7 +21,7 @@ async function buyPremiumActions(e) {
                         }, { headers: { Authorization: token } });
                     
                     e.target.remove();
-                    localStorage.setItem('premium', 'true');
+                    localStorage.setItem('token', res.data.token);
                     alert('You are a Premium User Now');
                 } catch (err) {
                     console.log('Error is:', err);

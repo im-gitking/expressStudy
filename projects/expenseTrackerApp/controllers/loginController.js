@@ -2,8 +2,8 @@ const Users = require('../models/users');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const generateAccessToken = (id, name) => {
-    return jwt.sign({ userID: id, name: name }, 'any secret key string');
+const generateAccessToken = (id, name, isPremium) => {
+    return jwt.sign({ userID: id, name: name, isPremium: isPremium }, 'any secret key string');
 }
 
 exports.login = (req, res, next) => {
@@ -22,7 +22,24 @@ exports.login = (req, res, next) => {
 
                     if (result === true) {
                         // console.log('t', result);
-                        res.json({ message: 'User Logged in Successfully', token: generateAccessToken(user[0].id, user[0].name) });
+                        const loginSuccess = async () => {
+                            try {
+                                const premiumCheck = await user[0].getOrders({ where: { status: 'SUCCESS' } });
+                                console.log(premiumCheck);
+                                if (premiumCheck.length > 0) {
+                                    console.log(1, premiumCheck[0].status);
+                                    res.json({ message: 'User Logged in Successfully', token: generateAccessToken(user[0].id, user[0].name, true) });
+                                }
+                                else {
+                                    res.json({ message: 'User Logged in Successfully', token: generateAccessToken(user[0].id, user[0].name, false) });
+                                }
+
+                            } catch (err) {
+                                console.log(err);
+                            }
+                        }
+
+                        loginSuccess();
                     }
                     else {
                         // console.log('f', result);
