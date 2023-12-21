@@ -19,8 +19,10 @@ async function buyPremiumActions(e) {
                             order_id: options.order_id,
                             payment_id: response.razorpay_payment_id
                         }, { headers: { Authorization: token } });
-                    
+
                     e.target.remove();
+                    document.querySelector('.premium').innerHTML = '<p>You are Premium User</p>';
+
                     localStorage.setItem('token', res.data.token);
                     alert('You are a Premium User Now');
                 } catch (err) {

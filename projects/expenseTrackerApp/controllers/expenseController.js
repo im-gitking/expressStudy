@@ -6,6 +6,11 @@ exports.postExpense = (req, res, next) => {
     // console.log(req.user);
     req.user.createExpense(data)
         .then(expense => {
+            req.user.totalExpense += data.expenseamount;
+            req.user.save();
+            return expense;
+        })
+        .then(expense => {
             res.json(expense);
         })
         .catch(err => console.log(err));
@@ -14,7 +19,7 @@ exports.postExpense = (req, res, next) => {
 exports.getExpense = (req, res, next) => {
     req.user.getExpenses()
         .then(expenses => {
-            // console.log(expenses);
+            // console.log(req.user.totalExpense);
             return res.json(expenses);
         })
         .catch(err => console.log(err));
@@ -23,10 +28,19 @@ exports.getExpense = (req, res, next) => {
 exports.deleteExpense = (req, res, next) => {
     const expenseId = req.params.id;
     // console.log(expenseId);
+    let expenseAmount = 0;
     Expenses.findByPk(expenseId)
         .then(expense => {
+            expenseAmount = expense.expenseAmount;
             expense.destroy();
-            res.json(expense);
+        })
+        .then(response => {
+            // console.log(123)
+            req.user.totalExpense -= expenseAmount;
+            req.user.save();
+        })
+        .then(user => {
+            res.json(user);
         })
         .catch(err => console.log(err));
 };

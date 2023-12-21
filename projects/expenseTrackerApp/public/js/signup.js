@@ -15,7 +15,7 @@ async function signupSubmit(e) {
         });
         // console.log(signupSubmitedData.data);
         if (!alert(signupSubmitedData.data.message)) {
-            location.reload();
+            window.location.href = 'login.html';
         }
 
     }

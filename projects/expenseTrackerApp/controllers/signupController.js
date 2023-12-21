@@ -18,7 +18,8 @@ exports.signup = (req, res, next) => {
                     user = await Users.create({
                         name: data.name,
                         email: data.email,
-                        password: hash
+                        password: hash,
+                        totalExpense: 0
                     });
                     res.status(200).json({ message: 'User is now registered' });
                 })
