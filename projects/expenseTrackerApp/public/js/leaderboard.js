@@ -4,7 +4,7 @@ const leaderBtn = document.querySelector('.leaderBtn');
 const leaderBoardList = (user) => {
     const newLi = document.createElement('li');
     newLi.classList = 'leaders';
-    newLi.innerHTML = `${user.name} - Rs. ${user.amount}`;
+    newLi.innerHTML = `${user.name} - Rs. ${user.total_cost}`;
     document.querySelector('.userList').appendChild(newLi);
 }
 

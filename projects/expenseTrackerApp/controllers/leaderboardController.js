@@ -13,25 +13,12 @@ exports.leaderboard = async (req, res, next) => {
                 }
             ],
             group: ['user.id'],
-            order: ['total_cost', 'DESC']
+            order: [['total_cost', 'DESC']]
         });
 
-        console.log(leaders);
-        // const leaderObject = [];
-        // let postion = 0;
+        // console.log(leaders);
 
-        // // users.forEach(user => {
-        // for(let i = users.length; i > 0; i--) {
-        //     let totalAmount = 0;
-        //     expenses.forEach(expense => {
-        //         if (users[i-1].id === expense.userId) {
-        //             totalAmount += expense.expenseamount;
-        //         }
-        //     })
-        //     leaderObject.push({ postion: ++postion, name: users[i-1].name, amount: totalAmount });
-        // }
-
-        // res.status(201).json(leaderObject);
+        res.status(201).json(leaders);
     }
     catch (err) {
         console.log(err);
