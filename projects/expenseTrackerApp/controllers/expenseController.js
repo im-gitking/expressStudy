@@ -27,15 +27,14 @@ exports.getExpense = (req, res, next) => {
 
 exports.deleteExpense = (req, res, next) => {
     const expenseId = req.params.id;
-    // console.log(expenseId);
     let expenseAmount = 0;
+
     Expenses.findByPk(expenseId)
         .then(expense => {
-            expenseAmount = expense.expenseAmount;
+            expenseAmount = expense.expenseamount;
             expense.destroy();
         })
         .then(response => {
-            // console.log(123)
             req.user.totalExpense -= expenseAmount;
             req.user.save();
         })
