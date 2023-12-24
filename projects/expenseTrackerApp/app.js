@@ -10,6 +10,7 @@ const loginRoutes = require('./routes/loginRoutes');
 const expenseRoutes = require('./routes/expenseRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes');
 const leaderboardRoutes = require('./routes/leaderboardRoutes');
+const passwordRoutes = require('./routes/passwordRoutes');
 
 // Model Tables
 const Users = require('./models/users');
@@ -29,6 +30,7 @@ app.use('/user', loginRoutes);
 app.use('/expenses', expenseRoutes);
 app.use('/purchase', purchaseRoutes);
 app.use('/premiumFeatures', leaderboardRoutes);
+app.use('/password', passwordRoutes);
 
 // Associations
 Users.hasMany(Expenses);
