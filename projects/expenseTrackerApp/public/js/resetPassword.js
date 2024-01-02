@@ -7,6 +7,7 @@ let params = (new URL(url)).searchParams;
 const resetId = params.get('id');
 console.log(resetId);
 
+// change password
 resetPassForm.addEventListener('submit', changePassword);
 async function changePassword(e) {
     e.preventDefault();

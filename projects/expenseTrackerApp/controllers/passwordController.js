@@ -86,14 +86,6 @@ exports.changePass = async (req, res, next) => {
 
 
 
-
-
-
-
-
-
-
-
 /*var SibApiV3Sdk = require('sib-api-v3-sdk');
 
 exports.forgotpassoword = (req, res, next) => {
