@@ -14,7 +14,7 @@ const addToExpenseList = (expense) => {
     expenseList.appendChild(newLi);
 }
 
-// Show Present Expenses
+// Show Present Expenses (with pagination)
 document.addEventListener('DOMContentLoaded', showExpenses);
 async function showExpenses(e) {
     try {
@@ -36,10 +36,11 @@ async function showExpenses(e) {
             document.querySelector('.premium').innerHTML = '<p>You are Premium User</p>';
         }
         
-        const getExpenses = await axios.get('http://localhost:3000/expenses/addExpense', { headers: { "Authorization": token } });
+        // pagination and expenselist showing
+        /*const getExpenses = await axios.get('http://localhost:3000/expenses/addExpense', { headers: { "Authorization": token } });
         getExpenses.data.forEach(expense => {
             addToExpenseList(expense);
-        });
+        });*/
     }
     catch (err) {
         console.log(err);
@@ -57,7 +58,6 @@ async function postExpenses(e) {
             category: category.value
         };
         const postedExpense = await axios.post('http://localhost:3000/expenses/addExpense', expense, { headers: { "Authorization": token } });
-        // console.log(postedExpense.data);
         addToExpenseList(postedExpense.data);
     }
     catch (err) {

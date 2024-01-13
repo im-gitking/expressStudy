@@ -50,6 +50,8 @@ exports.postExpense = async (req, res, next) => {
     }
 };
 
+/*
+// Expense Show -> Moved to pagination part
 exports.getExpense = (req, res, next) => {
     req.user.getExpenses()
         .then(expenses => {
@@ -57,7 +59,7 @@ exports.getExpense = (req, res, next) => {
             return res.json(expenses);
         })
         .catch(err => console.log(err));
-};
+};*/ 
 
 exports.deleteExpense = async (req, res, next) => {
     const t = await sequelize.transaction();
