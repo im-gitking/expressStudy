@@ -9,5 +9,6 @@ const router = express.Router();
 router.post('/addExpense', userAuthentecation.authenticate, expenseController.postExpense);
 router.get('/addExpense', userAuthentecation.authenticate, expenseController.getExpense);
 router.delete('/addExpense/:id', userAuthentecation.authenticate, expenseController.deleteExpense);
+router.get('/download', userAuthentecation.authenticate, expenseController.downloadExpense);
 
 module.exports = router;

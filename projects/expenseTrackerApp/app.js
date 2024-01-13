@@ -17,6 +17,7 @@ const Users = require('./models/users');
 const Expenses = require('./models/expense');
 const Orders = require('./models/order');
 const Forgotpassword = require('./models/forgotpass');
+const Downloads = require('./models/download');
 
 // Using packages to read Requests
 const app = express();
@@ -42,6 +43,9 @@ Orders.belongsTo(Users);
 
 Users.hasMany(Forgotpassword);
 Forgotpassword.belongsTo(Users);
+
+Users.hasMany(Downloads);
+Downloads.belongsTo(Users);
 
 // DB & server start
 sequelize

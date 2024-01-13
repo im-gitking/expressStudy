@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Daily Expenses - Expense Tracker App</title>
 </head>
+
 <body>
     <header>
         <div class="premium">
             <button class="buyPremium">Buy Premium</button>
         </div>
         <button class="leaderBtn">Show LeaderBoard</button>
+        <button class="downloadExpenses">Download</button>
     </header>
     <main>
         <form class="addExpenseForm" action="/" method="post">
@@ -33,19 +36,28 @@
             <input type="submit" value="Add Expense" id="addExpenseBtn">
         </form>
 
-        <div class="seeExpenses">
-            <ul class="expenseList"></ul>
+        <div class="expenses">
+            <div class="seeExpenses">
+                <ul class="expenseList"></ul>
+            </div>
+            <div class="paginations">
+                <button id="1">1</button>
+                <button id="1">2</button>
+            </div>
+
         </div>
 
         <div class="leaderBoard">
             <ol class="userList"></ol>
         </div>
     </main>
-    
+
     <script src="../public/js/addExpense.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="../public/js/premuim.js"></script>
     <script src="../public/js/leaderboard.js"></script>
+    <script src="../public/js/downloadExpense.js"></script>
 </body>
+
 </html>
