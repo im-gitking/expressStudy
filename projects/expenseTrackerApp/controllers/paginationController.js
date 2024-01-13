@@ -2,7 +2,7 @@
 exports.pagination = async (req, res) => {
     try {
         const targetPage = req.query.page;
-        const expensePerPage = 5;
+        const expensePerPage = Number(req.query.rows);
 
         const totalExpenses = await req.user.countExpenses();
 
@@ -10,8 +10,6 @@ exports.pagination = async (req, res) => {
             offset: (targetPage - 1) * expensePerPage,
             limit: expensePerPage
         });
-
-        console.log(userExpenses, 12345);
 
         res.status(200).json({ userExpenses, totalExpenses });
     }

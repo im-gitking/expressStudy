@@ -1,11 +1,13 @@
 const paginations = document.querySelector('.paginations');
 document.addEventListener('DOMContentLoaded', addPaginations);
 
+// Load Pagination and Expense List accordingly
 async function addPaginations(e, targetPage) {
     const pageNum = targetPage || 1;
+    const rowNum = localStorage.getItem('rowNum') || 5;
 
     try {
-        const paginationData = await axios.get(`http://localhost:3000/expenses/pagination?page=${pageNum}`, { headers: { "Authorization": token } });
+        const paginationData = await axios.get(`http://localhost:3000/expenses/pagination?page=${pageNum}&rows=${rowNum}`, { headers: { "Authorization": token } });
 
         // Clear the expense list and add new expenses
         expenseList.innerHTML = '';
@@ -14,7 +16,7 @@ async function addPaginations(e, targetPage) {
         });
 
         // Last number of pages
-        const lastPageNum = Math.ceil(paginationData.data.totalExpenses / 5);
+        const lastPageNum = Math.ceil(paginationData.data.totalExpenses / rowNum);
 
         // Add Paginations
         paginations.innerHTML = '';
@@ -49,8 +51,19 @@ async function addPaginations(e, targetPage) {
     }
 };
 
+// Chnage pagination numbers & Expenses from pagination buttons
 paginations.addEventListener('click', (e) => {
     if (e.target.classList.contains('pageNumber')) {
         addPaginations(null, Number(e.target.id));
     }
 });
+
+
+// Dynamic Pagination - Let user choose Expenses numbers per page
+const rowsPerPage = document.querySelector('.rowsPerPage #rows');
+rowsPerPage.value = localStorage.getItem('rowNum') || 5;
+
+rowsPerPage.addEventListener('change', (e) => {
+    const rowNum = e.target.value;
+    localStorage.setItem('rowNum', rowNum);
+})

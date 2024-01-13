@@ -37,6 +37,14 @@
         </form>
 
         <div class="expenses">
+            <div class="rowsPerPage">
+                <label for="rows">Rows per page:</label>
+                <select name="rows" id="rows" required>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
             <div class="seeExpenses">
                 <ul class="expenseList"></ul>
             </div>
