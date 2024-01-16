@@ -34,6 +34,8 @@ app.use('/purchase', purchaseRoutes);
 app.use('/premiumFeatures', leaderboardRoutes);
 app.use('/password', passwordRoutes);
 
+console.log(process.env.NODE_ENV);
+
 // Associations
 Users.hasMany(Expenses);
 Expenses.belongsTo(Users);
