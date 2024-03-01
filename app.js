@@ -25,7 +25,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  User.findById("65e0c852fb70ff97d449c46f")
+  User.findById("65e1dee9fb70ff97d449c475")
     .then((user) => {
       console.log(user);
       req.user = new User(user.name, user.email, user.cart, user._id);
