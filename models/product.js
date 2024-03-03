@@ -1,73 +1,36 @@
-/*const mongodb = require("mongodb");
-const getDb = require("../util/database").getDb;
+const mongoose = require("mongoose");
 
-class Product {
-  constructor(title, price, description, imageUrl, id, userId) {
-    this.title = title;
-    this.price = price;
-    this.description = description;
-    this.imageUrl = imageUrl;
-    this._id = id ? new mongodb.ObjectId(id) : null;
-    this.userId = userId;
-  }
+const Schema = mongoose.Schema;
 
-  save() {
-    const db = getDb();
-    let dbOp;
+// 1. We need to define Schema for Models in Mongoose
+// So that we can focus more on Data
+// 2. title: String --> also allowed
+// 3. title: {
+//   type: String,
+//   require: true,
+// } --> we can give more details too
+// 4. We dont need to set Id, it will be automatically set by MongoDB
+// 5. require: true --> means its mandatory to provide data for that field
+const productSchema = new Schema({
+  title: {
+    type: String,
+    require: true,
+  },
+  price: {
+    type: Number,
+    require: true,
+  },
+  description: {
+    type: String,
+    require: true,
+  },
+  imageUrl: {
+    type: String,
+    require: true,
+  },
+});
 
-    if (this._id) {
-      // Update the product
-      dbOp = db
-        .collection("products")
-        .updateOne({ _id: this._id }, { $set: this });
-    } else {
-      dbOp = db.collection("products").insertOne(this);
-    }
-
-    return dbOp
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => console.error(err));
-  }
-
-  static fetchAll() {
-    const db = getDb();
-    return db
-      .collection("products")
-      .find()
-      .toArray()
-      .then((products) => {
-        console.log(products);
-        return products;
-      })
-      .catch((err) => console.error(err));
-  }
-
-  static findById(prodId) {
-    const db = getDb();
-    return db
-      .collection("products")
-      .find({ _id: new mongodb.ObjectId(prodId) })
-      .next()
-      .then((product) => {
-        console.log(product);
-        return product;
-      })
-      .catch((err) => console.error(err));
-  }
-
-  static deleteById(prodId) {
-    const db = getDb();
-    return db
-      .collection("products")
-      .deleteOne({ _id: new mongodb.ObjectId(prodId) })
-      .then((result) => {
-        console.log("Deleted");
-      })
-      .catch((err) => console.error(err));
-  }
-}
-
-module.exports = Product;
-*/
+// 1. Defining Model while export
+// 2. mongoose.model() --> is used to define Models
+// 3. It takes 2 argument --> Model Name, Model Schemna
+module.exports = mongoose.model("Product", productSchema);

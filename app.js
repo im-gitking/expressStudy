@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 
 const errorController = require("./controllers/error");
 
-const User = require("./models/user");
+// const User = require("./models/user");
 
 const app = express();
 
@@ -25,23 +25,20 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  User.findById("65e1dee9fb70ff97d449c475")
-    .then((user) => {
-      console.log(user);
-      req.user = new User(user.name, user.email, user.cart, user._id);
-      next();
-    })
-    .catch((err) => console.log(err));
+  // User.findById("65e1dee9fb70ff97d449c475")
+  //   .then((user) => {
+  //     console.log(user);
+  //     req.user = new User(user.name, user.email, user.cart, user._id);
+  //     next();
+  //   })
+  //   .catch((err) => console.log(err));
+  next();
 });
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
-
-mongoConnect(() => {
-  app.listen(3000);
-});
 
 mongoose
   .connect(process.env.MONGODB_STRING)
